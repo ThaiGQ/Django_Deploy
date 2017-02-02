@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="header">
+            <div class="redirect">
+                <p>Logged in as: {{user.first_name}}</p>
+                <a href="{% url 'login:logout' %}">Logout</a>
+                <a href="{% url 'travel:main' %}">Home</a>
+            </div>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div> <!-- end of header -->
+        <div id="trip_details">
+            <form action = "{% url 'travel:add_trip' %}" method = "post">
+                {% csrf_token %}
+                <div class = "input_name">
+                    <label> Trip Name: </label>
+                    <input class = "input" type = "text" name = "trip_name">
+                </div> <!-- end of First Name entry field -->
+                <div class = "input_name">
+                    <label> Trip Destination: </label>
+                    <input class = "input" type = "text" name = "trip_destination">
+                </div> <!-- end of Last Name entry field -->
+                <div class = "input_name">
+                    <label> Trip Description: </label>
+                    <input class = "input" type = "text" name = "trip_description">
+                </div> <!-- end of Email entry field -->
+                <div class = "input_name">
+                    <label> Start Date: </label>
+                    <input class = "input" type = "date" name = "trip_begin">
+                </div> <!-- end of Password entry field -->
+                <div class = "input_name">
+                    <label> End Date: </label>
+                    <input class = "input" type = "date" name = "trip_end">
+                </div> <!-- end of Password Confirmation entry field -->
+                <input class = "submit_button" type = "submit" value = "Post Trip">
+            </form>
+        </div>
+    </body>
+</html>

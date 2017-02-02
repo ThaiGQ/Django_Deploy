@@ -1,0 +1,80 @@
+*{
+    margin = 0px;
+    padding = 0px;
+}
+
+#wrapper{
+    outline: 1px solid red;
+    /*width: 800px;*/
+    display: flex;
+    margin: auto;
+}
+    #add_course{
+        outline: 1px solid red;
+        width: 600px;
+    }
+
+        #add_course h2{
+            outline: 1px solid red;
+        }
+
+        .input_fields{
+            outline: 1px solid red;
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
+        }
+
+            .input_fields input{
+                width: 414px;
+            }
+
+        #add_button{
+            display: flex;
+            position: relative;
+            left: 500px;
+        }
+
+    #display_courses{
+        outline: 1px solid red;
+        margin: 20px auto;
+    }
+
+        .table_headers{
+            outline: 1px solid black;
+        }
+
+            #table_header_course_name{
+                outline: 1px solid black;
+            }
+            .table_column_course_name{
+                width: 250px;
+            }
+
+            #table_header_course_description{
+                outline: 1px solid black;
+            }
+            .table_column_course_description{
+                width: 350px;
+            }
+
+            #table_header_course_added{
+                outline: 1px solid black;
+            }
+            .table_column_course_added{
+                width: 150px;
+            }
+
+            #table_header_course_updated{
+                outline: 1px solid black;
+            }
+            .table_column_course_updated{
+                width: 150px;
+            }
+
+            #table_header_course_actions{
+                outline: 1px solid black;
+            }
+            .table_column_course_actions{
+                width: 150px;
+            }

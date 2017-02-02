@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+       <title>Dojo Survey Results</title>
+       {% load staticfiles %}
+       <link rel="stylesheet" type="text/css" href="{% static 'login/css/success.css' %}">
+    </head>
+    <body>
+        <div id = "wrapper">
+            <div id="header">
+                <div class="redirect">
+                    <p>Logged in as: {{user.first_name}}</p>
+                    <a href="{% url 'login:logout' %}">Logout</a>
+                    <a href="{% url 'travel:main' %}">Home</a>
+                </div>
+            </div>
+            <div id = "main_content">
+                {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                <h3>Submitted Info</h3>
+                <div id = "data">
+                    <div class = "input_field">
+                        <p class = "input_name"> First Name: </p>
+                        <p class = "input">{{user.first_name}}</p>
+                    </div>
+                    <div class = "input_field">
+                        <p class = "input_name"> First Name: </p>
+                        <p class = "input">{{user.last_name}}</p>
+                    </div>
+                    <div class = "input_field">
+                        <p class = "input_name"> Email: </p>
+                        <p class = "input">{{user.email}}</p>
+                    </div>
+                </div> <!-- end of user_info -->
+            </div> <!-- end of main_content -->
+            <a href="{% url 'travel:main' %}">Continue to Main Page</a>
+        </div> <!-- end of wrapper -->
+    </body>
+</html>

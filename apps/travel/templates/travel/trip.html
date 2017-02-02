@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="header">
+            <div class="redirect">
+                <p>Logged in as: {{user.first_name}}</p>
+                <a href="{% url 'login:logout' %}">Logout</a>
+                <a href="{% url 'travel:main' %}">Home</a>
+            </div>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div id="main_content">
+            <div id="trip_info">
+                <h2>{{trip.trip_name}}</h2>
+                <p> Created by: {{trip.created_by.first_name}} {{trip.created_by.last_name}}</p>
+                <p> Trip Destination: {{trip.trip_destination}} </p>
+                <p> Trip Description: {{trip.trip_description}} </p>
+                <p> Start Date: {{trip.trip_begin}}</p>
+                <p> End Date: {{trip.trip_end}}</p>
+            </div> <!-- end of trip_info -->
+            <div id="travel_companions">
+                <h3>Expedition Roster:</h3>
+                {% for people in companions %}
+                    {% if people.companion_id != people.trip.created_by.id %}
+                        <p>{{people.companion.first_name}} {{people.companion.last_name}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div> <!-- end of display_courses -->
+        </div> <!-- end of main_content -->
+    </body>
+</html>

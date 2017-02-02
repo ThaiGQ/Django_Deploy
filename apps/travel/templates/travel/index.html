@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'curriculum/css/index.css' %}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="redirect">
+                    <p>Logged in as: {{user.first_name}}</p>
+                    <a href="{% url 'login:logout' %}">Logout</a>
+                    <a href="{% url 'travel:main' %}">Home</a>
+                </div>
+                {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div> <!-- end of header -->
+            <div id="main_content">
+                <div id="user_trips">
+                    <h2> Your Scheduled Expeditions: </h2>
+                    <table>
+                        <tr class="table_headers">
+                            <th id = "table_header_trip_name" class = "table_column_trip_name">Trip Name</th>
+                            <th id = "table_header_trip_destination" class = "table_column_trip_destination">Trip Destination</th>
+                            <th id = "table_header_trip_description" class = "table_column_trip_description">Trip Description</th>
+                            <th id = "table_header_trip_begin" class = "table_column_trip_begin">Start Date</th>
+                            <th id = "table_header_trip_end" class = "table_column_trip_end">End Date</th>
+                            <th id = "table_header_trip_created_by" class = "table_column_created_by">Created By</th>
+                        </tr> <!-- end of tabe_headers -->
+                        {% for yours in companions %}
+
+                                <tr>
+                                    <td class = "table_column_trip_name">{{yours.trip.trip_name}}</td>
+                                    <td class = "table_column_trip_destination"><a href="{% url 'travel:show_trip' trip_id=yours.trip.id %}">{{yours.trip.trip_destination}}</a></td>
+                                    <td class = "table_column_trip_description">{{yours.trip.trip_description}}</td>
+                                    <td class = "table_column_trip_begin">{{yours.trip.trip_begin}}</td>
+                                    <td class = "table_column_trip_end">{{yours.trip.trip_end}}</td>
+                                    <td class = "table_column_created_by">{{yours.trip.created_by.first_name}} {{yours.trip.created_by.last_name}}</td>
+                                </tr>
+
+                        {% endfor %}
+                    </table>
+                </div> <!-- end of add_course -->
+                <div id="display_trips">
+                    <h2>More Exciting Adventures:</h2>
+                    <table>
+                        <tr class="table_headers">
+                            <th id = "table_header_trip_name" class = "table_column_trip_name">Trip Name</th>
+                            <th id = "table_header_trip_destination" class = "table_column_trip_destination">Trip Destination</th>
+                            <th id = "table_header_trip_description" class = "table_column_trip_description">Trip Description</th>
+                            <th id = "table_header_trip_begin" class = "table_column_trip_begin">Start Date</th>
+                            <th id = "table_header_trip_end" class = "table_column_trip_end">End Date</th>
+                            <th id = "table_header_trip_created_by" class = "table_column_created_by">Created By</th>
+                            <th id = "table_header_course_actions" class = "table_column_course_actions">Actions</th>
+                        </tr> <!-- end of tabe_headers -->
+                        {% for trip in other_trips %}
+                                    <tr>
+                                        <td class = "table_column_trip_name">{{trip.id}} {{trip.trip_name}}</td>
+                                        <td class = "table_column_trip_destination"><a href="{% url 'travel:show_trip' trip_id=trip.id %}">{{trip.trip_destination}}</a></td>
+                                        <td class = "table_column_trip_description">{{trip.trip_description}}</td>
+                                        <td class = "table_column_trip_begin">{{trip.trip_begin}}</td>
+                                        <td class = "table_column_trip_end">{{trip.trip_end}}</td>
+                                        <td class = "table_column_created_by">{{trip.created_by.first_name}} {{trip.created_by.last_name}}</td>
+                                        <td class = "table_column_course_actions">
+                                            <a href="{% url 'travel:join_trip' trip_id=trip.id %}"> Join </a>
+                                        </td>
+                                    </tr>
+                        {% endfor %}
+                    </table>
+                </div> <!-- end of display_trips -->
+                <a href="{% url 'travel:new_trip' %}">Add New Trip</a>
+            </div> <!-- end of main_content -->
+        </div> <!-- end of wrapper -->
+    </body>
+</html>
